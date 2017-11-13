@@ -1,0 +1,19 @@
+image: golang:1.9
+
+variables:
+  REPO_NAME: gitlab.com/universe-conquerors/easyhttp
+
+before_script:
+  - go version
+
+stages:
+  - test
+
+unittests:
+  stage: test
+  script:
+    - mkdir -p $GOPATH/src/$REPO_NAME
+    - mv $CI_PROJECT_DIR/* $GOPATH/src/$REPO_NAME
+    - cd $GOPATH/src/$REPO_NAME
+    - go get -v
+    - go test $(go list ./... | grep -v /vendor/)
