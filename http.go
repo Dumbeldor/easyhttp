@@ -46,7 +46,7 @@ func GetJWTAuthHeader(r *http.Request) (*string, *ErrorResponse, int) {
 		return nil, er, http.StatusBadRequest
 	}
 
-	if ahSplited[0] != "JWT" {
+	if ahSplited[0] != "Bearer" {
 		er := &ErrorResponse{Message: "Authorization header doesn't describe a JWT Authorization."}
 		return nil, er, http.StatusBadRequest
 	}
