@@ -16,18 +16,21 @@ type JWTRawHeader struct {
 func GetJWTAuthHeader(r *http.Request) (*JWTRawHeader, *ErrorResponse, int) {
 	authHeader := r.Header.Get("Authorization")
 	if len(authHeader) == 0 {
-		er := &ErrorResponse{Message: "Authorization header is missing."}
+		er := &ErrorResponse{}
+		er.Body.Message = "Authorization header is missing."
 		return nil, er, http.StatusBadRequest
 	}
 
 	ahSplited := strings.Split(authHeader, " ")
 	if len(ahSplited) != 2 {
-		er := &ErrorResponse{Message: "Malformed Authorization header."}
+		er := &ErrorResponse{}
+		er.Body.Message = "Malformed Authorization header."
 		return nil, er, http.StatusBadRequest
 	}
 
 	if ahSplited[0] != "Bearer" {
-		er := &ErrorResponse{Message: "Authorization header doesn't describe a JWT Authorization."}
+		er := &ErrorResponse{}
+		er.Body.Message = "Authorization header doesn't describe a JWT Authorization."
 		return nil, er, http.StatusBadRequest
 	}
 
