@@ -9,9 +9,10 @@ import (
 )
 
 // swagger:response ErrorResponse
-//
-// Standard error response
 type ErrorResponse struct {
+	// Error message
+	// in: body
+	// required: true
 	Message string `json:"message,required"`
 }
 
