@@ -8,8 +8,11 @@ import (
 	"strings"
 )
 
+// swagger:response ErrorResponse
+//
+// Standard error response
 type ErrorResponse struct {
-	Message string `json:"message"`
+	Message string `json:"message,required"`
 }
 
 func ReadJsonRequest(payload io.ReadCloser, decodedPayload interface{}) bool {
