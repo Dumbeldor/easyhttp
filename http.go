@@ -9,10 +9,12 @@ import (
 
 // swagger:response ErrorResponse
 type ErrorResponse struct {
-	// Error message
 	// in: body
-	// required: true
-	Message string `json:"message,required"`
+	Body struct {
+		// Error message
+		// required: true
+		Message string `json:"message,required"`
+	}
 }
 
 func ReadJsonRequest(payload io.ReadCloser, decodedPayload interface{}) bool {
