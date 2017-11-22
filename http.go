@@ -7,6 +7,16 @@ import (
 	"net/http"
 )
 
+// swagger:response MessageResponse
+type MessageResponse struct {
+	// in: body
+	Body struct {
+		// Message
+		// required: true
+		Message string `json:"message, required"`
+	}
+}
+
 // swagger:response ErrorResponse
 type ErrorResponse struct {
 	// in: body
