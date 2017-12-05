@@ -5,6 +5,7 @@ import (
 	"io"
 	"log"
 	"net/http"
+	"github.com/labstack/echo"
 )
 
 // swagger:response MessageResponse
@@ -46,4 +47,13 @@ func WriteHTTPJsonResponse(w http.ResponseWriter, code int, payload interface{})
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(code)
 	w.Write(response)
+}
+
+func WriteJSONError(c echo.Context, log interface{}, httpStatus int, userMessage interface{}, errorMessage string) error {
+	if len(errorMessage) == 0 {
+		log.Errorf("%s - error %d: %s", c.Path(), httpStatus, userMessage)
+	} else {
+		log.Errorf("%s - error %d: %s", c.Path(), httpStatus, errorMessage)
+	}
+	return c.JSON(httpStatus, userMessage)
 }
