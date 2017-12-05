@@ -6,6 +6,7 @@ import (
 	"log"
 	"net/http"
 	"github.com/labstack/echo"
+	"github.com/op/go-logging"
 )
 
 // swagger:response MessageResponse
@@ -49,7 +50,7 @@ func WriteHTTPJsonResponse(w http.ResponseWriter, code int, payload interface{})
 	w.Write(response)
 }
 
-func WriteJSONError(c echo.Context, log interface{}, httpStatus int, userMessage interface{}, errorMessage string) error {
+func WriteJSONError(c echo.Context, log *logging.Logger, httpStatus int, userMessage interface{}, errorMessage string) error {
 	if len(errorMessage) == 0 {
 		log.Errorf("%s - error %d: %s", c.Path(), httpStatus, userMessage)
 	} else {
